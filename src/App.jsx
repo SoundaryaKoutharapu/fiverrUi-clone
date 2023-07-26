@@ -1,11 +1,11 @@
-import { useState } from 'react'
 import './App.css'
+import Navbar from './Components/navbar/Navbar'
 
 function App() {
   return (
     <>
      <div>
-      This is fiver UI Clone
+     <Navbar/>
      </div>
     </>
   )
