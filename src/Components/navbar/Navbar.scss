@@ -55,6 +55,40 @@
                 }
 
                 }
+
+                .user
+                {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    cursor: pointer;
+                    position: relative;
+
+                    img
+                    {
+                        width: 32px;
+                        height: 32px;
+                        border-radius: 50%;                       
+                        object-fit: cover;
+                    }
+
+                    .options
+                    {
+                        position: absolute;
+                        top: 100%;
+                        right: 0;
+                        padding: 20px;
+                        background-color: #fff;
+                        border-radius: 10px;
+                        border: 1px solid lightgray;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 10px;
+                        width: 200px;
+                        color: lightgray;
+                    }
+                }
+
                 
                 span{
                     
