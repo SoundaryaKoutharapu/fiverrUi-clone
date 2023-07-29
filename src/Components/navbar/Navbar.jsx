@@ -1,14 +1,17 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import '../navbar/Navbar.scss'
-import { useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 
 const Navbar = () => {
 
     const [active, setActive] = useState(false)
     const [open, setOpen] = useState(false)
 
+
+    const {pathname} = useLocation()
+
     const isActive = () => {
-      window.scrollY > 0 ? setActive(true) : setActive(false)
+        window.scrollY > 0 ? setActive(true) : setActive(false)
     }
 
     useEffect(() => {
@@ -29,13 +32,13 @@ const Navbar = () => {
 
 
     return (
-        <div className={active ? 'navbar active' : 'navbar'}>
+        <div className={active || pathname !== '/' ? 'navbar active' : 'navbar'}>
             <div className='container'>
                 <div className='logo'>
-                    {/* <Link to='/'> */}
-                    <span className='text'>fiverr</span>
-                    <span className='dot'>.</span>
-                    {/* </Link> */}
+                    <Link to='/' className='link'>
+                        <span className='text'>fiverr</span>
+                        <span className='dot'>.</span>
+                    </Link>
                 </div>
                 <div className='links'>
                     <span>Fiverr Business</span>
@@ -45,27 +48,27 @@ const Navbar = () => {
                     {!currentUser?.isSeller && <span>Become a Seller</span>}
                     {!currentUser && <button>Join</button>}
                     {currentUser && (
-                        <div className='user' onClick={ () => {setOpen(!open)}}>
+                        <div className='user' onClick={() => { setOpen(!open) }}>
                             <img src="https://images.unsplash.com/photo-1469598614039-ccfeb0a21111?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXw1MDE0MjAyfHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60" alt="profile pic" />
                             <span>{currentUser?.userName}</span>
                             {open && <div className='options'>
                                 {
                                     currentUser?.isSeller && (
                                         <>
-                                            <span>Gigs</span>
-                                            <span>Add new Gig</span>
+                                            <Link to='/myGigs' className='link'>Gigs</Link>
+                                            <Link to='/add' className='link'>Add new Gig</Link>
                                         </>
                                     )
                                 }
-                                <span>Orders</span>
-                                <span>Messages</span>
-                                <span>Logout</span>
-                            </div> }
+                                <Link to='/orders' className='link'>Orders</Link>
+                                <Link to='/messages' className='link'>Messages</Link>
+                                <Link to='/' className='link'>Logout</Link>
+                            </div>}
                         </div>
                     )}
                 </div>
             </div>
-            {active && (
+            {active  || pathname !== '/' && (
                 <>
                     <hr />
                     <div className='menu'>
